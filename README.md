@@ -1,6 +1,7 @@
 # Expresiones Regulares
 
-## Nom i cognoms
+## Thomas lessing
+
 
 ## Tratamiento de ficheros de notas
 
