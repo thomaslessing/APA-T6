@@ -42,3 +42,20 @@ class Alumno:
         completo y la nota media del alumno con un decimal.
         """
         return f'{self.numIden}\t{self.nombre}\t{self.media():.1f}'
+
+def leeAlumnos(ficAlum):
+    format = r"(?P<id>\d+)\s+(?P<nombre>[a-zA-ZàÀéÉèÈóÓòÒíÍúÚçÇñ\s]+)\s+(?P<notas>(\d+(?:[.,]\d+)?(?:\s+|$))*)"
+
+    alumnos = {}
+    with open(ficAlum, "rt") as f:
+        for linea in f:
+            if busqueda := re.search(format, linea):
+                notas = list(map(float, busqueda.group('notas').split()))
+                alumno = Alumno(busqueda.group('nombre'), int(busqueda.group('id')), notas)
+                alumnos[busqueda['id']] = alumno
+            
+    return alumnos 
+        
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod(optionflags=doctest.NORMALIZE_WHITESPACE, verbose=True)
